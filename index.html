@@ -8,9 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --p3r-ocean-light: #0088ff;
-            --p3r-ocean-mid: #0044cc;
-            --p3r-ocean-dark: #001144;
             --p3r-cyan: #5cdbfe;
             --p3r-pink: #ff1461;
             --p3r-white: #ffffff;
@@ -20,114 +17,23 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--p3r-ocean-dark);
+            background-color: var(--p3r-black); /* Fallback color */
             font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif;
             overflow: hidden;
             color: var(--p3r-white);
             user-select: none;
         }
 
-        /* --- Enhanced Stylized Ocean Background --- */
-        .ocean-container {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 85% 15%, #00aaff 0%, #0044cc 45%, #001144 100%);
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        /* Sharp stylized light shafts piercing the water */
-        .p3r-light-shafts {
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                -45deg,
-                transparent 0px,
-                transparent 40px,
-                rgba(255, 255, 255, 0.05) 40px,
-                rgba(255, 255, 255, 0.05) 80px,
-                transparent 80px,
-                transparent 140px,
-                rgba(92, 219, 254, 0.08) 140px,
-                rgba(92, 219, 254, 0.08) 160px
-            );
-            animation: shaftSway 20s ease-in-out infinite alternate;
-            transform-origin: center;
-            mix-blend-mode: overlay;
-        }
-
-        /* Organic, shifting water caustics using CSS blobs */
-        .water-blob {
-            position: absolute;
-            filter: blur(15px);
-            mix-blend-mode: screen;
-            animation: blobFloat 25s infinite linear;
-            opacity: 0.6;
-        }
-
-        .blob1 {
-            width: 70vw; height: 70vw;
-            top: -20vw; right: -10vw;
-            background: radial-gradient(circle, rgba(92, 219, 254, 0.4), transparent 70%);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-        }
-
-        .blob2 {
-            width: 90vw; height: 90vw;
-            top: 10vw; right: -30vw;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 60%);
-            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
-            animation-duration: 35s;
-            animation-direction: reverse;
-        }
-
-        .blob3 {
-            width: 60vw; height: 60vw;
-            bottom: -10vw; right: 20vw;
-            background: radial-gradient(circle, rgba(0, 136, 255, 0.3), transparent 70%);
-            border-radius: 30% 70% 50% 50% / 50% 40% 60% 50%;
-            animation-duration: 28s;
-        }
-
-        /* The massive white diagonal cut on the left */
-        .white-diagonal-cut {
+        /* --- Fullscreen Video Background --- */
+        .bg-video {
             position: absolute;
             top: 0;
             left: 0;
-            bottom: 0;
-            width: 65%;
-            background-color: var(--p3r-white);
-            clip-path: polygon(0 0, 75% 0, 45% 100%, 0 100%);
-            z-index: 2;
-            box-shadow: 20px 0 50px rgba(0,0,0,0.5);
-        }
-
-        /* Bubbles */
-        .bubble {
-            position: absolute;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(92, 219, 254, 0.2));
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            z-index: 3;
-            animation: rise 8s infinite ease-in;
-            opacity: 0;
-        }
-
-        /* Floating Character Container - Sinking Animation */
-        .floating-character {
-            position: absolute;
-            left: -5%;
-            top: -5%;
-            width: 65%;
-            height: 110%;
-            z-index: 3;
-            /* Gentle sinking and drifting motion */
-            animation: sinkAnim 8s ease-in-out infinite alternate;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
             pointer-events: none;
-            filter: drop-shadow(15px 25px 15px rgba(0,0,0,0.25));
         }
 
         /* Vertical giant text on the left */
@@ -307,29 +213,6 @@
         }
 
         /* Animations */
-        @keyframes breathe {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05) translate(2%, 2%); }
-        }
-
-        @keyframes blobFloat {
-            0% { transform: rotate(0deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-            33% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: rotate(120deg) scale(1.05); }
-            66% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; transform: rotate(240deg) scale(0.95); }
-            100% { transform: rotate(360deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-        }
-
-        @keyframes shaftSway {
-            0% { transform: rotate(0deg) translateX(0); }
-            100% { transform: rotate(5deg) translateX(-50px); }
-        }
-
-        @keyframes sinkAnim {
-            0% { transform: translateY(-10px) translateX(0px) rotate(0deg); }
-            50% { transform: translateY(15px) translateX(-5px) rotate(-1deg); }
-            100% { transform: translateY(-5px) translateX(5px) rotate(1deg); }
-        }
-
         @keyframes sliceIn {
             0% { width: 0%; opacity: 0; }
             100% { width: 120%; opacity: 1; }
@@ -342,17 +225,6 @@
 
         /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            .white-diagonal-cut {
-                width: 90%;
-                clip-path: polygon(0 0, 100% 0, 15% 100%, 0 100%);
-            }
-
-            .floating-character {
-                width: 140%; /* Scale up so face is visible */
-                left: -35%;
-                top: 5%;
-            }
-
             .vertical-bg-text {
                 font-size: 8vh;
             }
@@ -408,22 +280,12 @@
 </head>
 <body>
 
-    <!-- Pure CSS Enhanced Ocean Background -->
-    <div class="ocean-container">
-        <div class="p3r-light-shafts"></div>
-        <div class="water-blob blob1"></div>
-        <div class="water-blob blob2"></div>
-        <div class="water-blob blob3"></div>
-    </div>
+    <!-- Video Background -->
+    <video class="bg-video" autoplay loop muted playsinline>
+        <source src="ab.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-    <!-- Large White Diagonal Framing -->
-    <div class="white-diagonal-cut"></div>
-
-    <!-- Floating Stylized Character Graphic -->
-    <div class="floating-character">
-        <img src="download.gif" alt="Makoto Yuki Sinking" style="width: 100%; height: 100%; object-fit: contain; pointer-events: none;">
-    </div>
-    
     <!-- Vertical Background Text (Wrapped in container to perfectly center vertically) -->
     <div class="vertical-bg-text-container">
         <div class="vertical-bg-text" id="bg-vertical-text">DEATH'S MODS</div>
